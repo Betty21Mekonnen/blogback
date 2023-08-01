@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../assets/image2.png';
 import '../pages/Write';
-
+import { AuthContext } from '../context/authContext';
+import { useContext } from 'react';
 export default function Navbar() {
+  const {currentUser , logout}=useContext(AuthContext)
   const [showMenu, setShowMenu] = useState(false);
 
   const handleMenuToggle = () => {
@@ -37,8 +39,10 @@ export default function Navbar() {
           </Link>
         </div>
         <div className="flex gap-2.5 items-center">
-          <span className="cursor-pointer">Betty</span>
-          <span className="cursor-pointer">Logout</span>
+          <span className="cursor-pointer">{currentUser?.username}</span>
+         {currentUser ? (<span onClick={logout} className="cursor-pointer">Logout</span>):
+         <Link to="/login">Login</Link>
+         }
           <span className="cursor-pointer border rounded-full h-10 w-12 px-1 py-1.5 bg-blue-100">
             <Link to="./write">Write</Link>
           </span>
