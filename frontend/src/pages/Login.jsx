@@ -2,6 +2,8 @@ import React, { useState} from 'react';
 import { Link, useNavigate} from 'react-router-dom';
 import image2 from '../assets/image2.png'
 import axios from 'axios';
+import { useContext } from 'react';
+import { AuthContext } from '../context/authContext';
 /*export default function Login() {
   const navigate=useNavigate()
   const [inputs ,setInput]=useState({
@@ -30,6 +32,7 @@ export default function Login() {
     email: '',
     password: ''
   });
+  const {login}=useContext(AuthContext)
   const handleChange=(e)=>{
     setInputs(prev=>({...prev,[e.target.name]:e.target.value}))
   }
@@ -38,21 +41,20 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:4000/backend/auth/log', {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(inputs)  
-      });
-
-     // const data = await response.json();
-
-      if(response.status === 200) {
-        navigate("/")
-      }
-
+      // const response = await fetch('http://localhost:4000/backend/auth/log', {
+      //   method: 'POST',
+      //   credentials: 'include',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify(inputs)  
+      // });
+       await login(inputs)
+       navigate("/")
+      // if(response.status === 200) {
+      //   navigate("/")
+      // }
+    
     } catch(err) {
       console.error(err);
     }
