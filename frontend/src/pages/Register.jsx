@@ -14,7 +14,7 @@ export default function Register() {
     e.preventDefault()
   
     try{
-   await axios.post("http://localhost:5000/backend/auth/reg",inputs)
+   await axios.post("http://localhost:4000/backend/auth/reg",inputs)
       navigate("/Login")
     }catch(err){
       console.log(err)
