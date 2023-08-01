@@ -17,14 +17,12 @@ export const register=(req,res)=>{
 	});
 } ;
 export const login = async(req,res)=>{
-	console.log('login ...')
 	const q="SELECT *FROM users WHERE email=?";
- 	const result =	db.query(q,[req.body.email],(err,data)=>{
+	db.query(q,[req.body.email],(err,data)=>{
 		
 		if(err) return res.json(err)
 		if(data.length === 0) return res.status(400).json("user not found!")
 		const ispasswordcorrect = bcrypt.compareSync(req.body.password,data[0].password);
-		console.log(ispasswordcorrect)
 		if(!ispasswordcorrect) return res.status(400).json("Wrong email or password")
 		const token = jwt.sign({ id: data[0].id }, "jwtnewkey");
         const { password, ...other } = data[0];
@@ -40,6 +38,9 @@ export const login = async(req,res)=>{
 	}
 	});
 }
-export const logout=(req,res)=>{
- 
-}
+export const logout = (req, res) => {
+	res.clearCookie("newtoken",{
+	  sameSite:"none",
+	  secure:true
+	}).status(200).json("User has been logged out.")
+  };
