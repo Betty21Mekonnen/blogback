@@ -94,7 +94,7 @@ const Register = () => {
               className="flex justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-gray-900 border border-transparent rounded-md shadow-sm hover:bg-gray-800 focus:outline-none focus:shadow-outline-blue active:bg-gray-900">
              Sign up </button>
                     <div className="flex justify-center mt-6 text-sm leading-5">
-         <Link to="/register"
+         <Link to="/login"
             className="font-medium text-gray-900 hover:text-gray-700 focus:outline-none focus:underline transition ease-in-out duration-150" >
                         already have an account? sign in </Link>
        </div>
