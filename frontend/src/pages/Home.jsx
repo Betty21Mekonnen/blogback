@@ -1,11 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import image1 from '../assets/image2.png'
-import image2 from '../assets/Logo.png'
+import image1 from '../assets/Lalibela.jpg'
+import image2 from '../assets/debredamo.jpg'
 export default function Home() { 
   const posts=[
                 {
-                  id:1,title:"book1", desc:"hellonjkfkhguf mfngjfhj njvhuiy nvbjgiur bvnbgdfj" ,image:image2
+                  id:1,title:"book1", 
+                  desc:"The Debre Damo monastery, which dates back to early Aksumite times, is said to possess the Ethiopia's oldest existing church. Legend has it that Abba Aragawi, one of the 'Nine Saints', while wandering at the foot of the cliff, judged that the plateau above him was a suitable place to live a solitary life. God, hearing his wish, commanded a snake living on the mountain-top to stretch down and lift up the holy man, who made Debre Damo his abode.",
+                  image:image2
                 },
                 {
                   id:2,title:"book2",desc:"kmjkgjfi fghjh nnbjbetelhem mekonnen", image:image1
