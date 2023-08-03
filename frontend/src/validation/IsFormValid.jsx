@@ -48,6 +48,10 @@ const useRegisterForm = (callback) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(inputs.email==="" || inputs.password===""){
+      alert("Please fill in all required fields.")
+    return;
+  }
     if (noErrors) {
       try {
         await axios.post('http://localhost:4000/backend/auth/reg', inputs);

@@ -1,8 +1,9 @@
-import React, { useState} from 'react';
+import React, { useState,useEffect} from 'react';
 import { Link, useNavigate} from 'react-router-dom';
 import image2 from '../assets/image2.png'
 import { useContext } from 'react';
 import { AuthContext } from '../context/authContext';
+import {validateEmail, validatePassword} from "../validation/Validation"
 /*export default function Login() {
   const navigate=useNavigate()
   const [inputs ,setInput]=useState({
@@ -28,10 +29,32 @@ export default function Login() {
     email: '',
     password: ''
   });
-  const {login}=useContext(AuthContext)
+  const [errors, setErrors] = useState({});
+  const [isSubmitting,    setSubmitted] = useState(false);
+  const {login,loginResponse}=useContext(AuthContext)
   const handleChange=(e)=>{
+    const { name, value } = e.target;
+
+    if (name === 'email') {
+      const isValid = validateEmail(value);
+      setErrors((prev) => ({
+        ...prev,
+        email: isValid ? '' : 'Email is invalid',
+      }));
+    }
+    if (name === 'password') {
+      const isValid = validatePassword(value);
+      setErrors((prev) => ({
+        ...prev,
+        password: isValid
+          ? ''
+          : 'Password must be at least 8 characters and contain at least one lowercase letter, one uppercase letter, one number, and one special character',
+      }));
+    }
     setInputs(prev=>({...prev,[e.target.name]:e.target.value}))
+    
   }
+  const noErrors = Object.values(errors).every((error) => !error);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -43,16 +66,33 @@ export default function Login() {
       //   },
       //   body: JSON.stringify(inputs)  
       // });
-       await login(inputs)
-          navigate("/")
       // if(response.status === 200) {
       //   navigate("/")
       // }
-    
+      if(inputs.email==="" || inputs.password===""){
+          alert("Please fill in all required fields.")
+       return;
+      }
+      if(noErrors){
+        console.log(loginResponse)
+      await login(inputs)
+      if(loginResponse===200) {
+        navigate("/");
+      }
+    }
+    else{
+      setSubmitted(true)
+    }
+      
     } catch(err) {
       console.error(err);
     }
-  }
+  } 
+  // useEffect(() => {
+  //   if (loginResponse === 200) {
+  //   navigate("/");
+  //   }
+  //   }, [loginResponse]);
   return (
 	<div className="h-screen">
   <div className="h-full">
@@ -74,6 +114,9 @@ export default function Login() {
                <label className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
               <div className="mt-2">
                <input onChange={handleChange} id="email" name="email" type="email" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+               {isSubmitting && errors.email && (
+                          <p className="text-red-500 text-sm">{errors.email}</p>
+                        )}
               </div>
              </div>
 
@@ -83,6 +126,11 @@ export default function Login() {
              </div>
              <div className="mt-2">
                <input onChange={handleChange} id="password" name="password" type="password" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+               {isSubmitting && errors.password && (
+                          <p className="text-red-500 text-sm">
+                            {errors.password}
+                          </p>
+                        )}
             </div>
             </div>
 	            <div className="text-sm">
