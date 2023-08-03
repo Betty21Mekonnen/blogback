@@ -1,11 +1,9 @@
-import { useEffect,useState } from "react"; 
+import { useEffect,useState} from "react"; 
 import { createContext } from "react";
-
 export const AuthContext=createContext()
-
 export const AuthContextProvider=({children})=>{
   const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
-
+  const [loginResponse, setLoginResponse] = useState(null);
   const login = async (inputs) => {    
 	 const response = await fetch('http://localhost:4000/backend/auth/log', {
 		  method: 'POST',
@@ -15,12 +13,12 @@ export const AuthContextProvider=({children})=>{
 		  },
 		  body: JSON.stringify(inputs)  
 		});
-        response.json()
+    response.json()
     .then(user => {setCurrentUser(user)})
+    setLoginResponse(response.status);
   }
-   
   const logout = async () => {    
-    const response = await fetch('http://localhost:4000/backend/auth/logout', {
+    await fetch('http://localhost:4000/backend/auth/logout', {
       method: 'POST',
       credentials: 'include',  
     });
@@ -34,7 +32,7 @@ export const AuthContextProvider=({children})=>{
   }, [currentUser]);
 
   return (    
-    <AuthContext.Provider value={{currentUser, login, logout}}>      
+    <AuthContext.Provider value={{currentUser, login, logout,loginResponse}}>      
       {children}      
     </AuthContext.Provider>
   )
