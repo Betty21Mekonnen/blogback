@@ -78,7 +78,7 @@ export default function Navbar() {
           <Link to="/?cat=art">
             <h6 className="text-base my-2">Art</h6>
           </Link>
-          <Link to="/?cat=scince">
+          <Link to="/?cat=science">
             <h6 className="text-base my-2">Science</h6>
           </Link>
           <Link to="/?cat=technology?">
