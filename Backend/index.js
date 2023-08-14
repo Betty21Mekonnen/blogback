@@ -3,7 +3,11 @@ import postRoutes from './routes/posts.js'
 import userRoutes from './routes/users.js'
 import authRoutes from './routes/auth.js'
 import cookieParser from "cookie-parser"
+import multer from "multer"
+import jwt from 'jsonwebtoken'
 const app=express()
+app.use(cookieParser())
+app.use(express.json())
 import cors from 'cors'
 const allowedOrigin = 'http://127.0.0.1:5173';
 app.use(cors({
@@ -15,11 +19,37 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', allowedOrigin);
   next();
 });
-app.use(cookieParser())
-app.use(express.json())
+
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '../frontend/public/upload')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now()+file.originalname)
+  }
+})
+
+
+const upload = multer({storage })
+app.post('/backend/upload', upload.single('file'), function (req, res) {
+  const file=req.file
+   res.status(200).json(file.filename)
+})
 app.use("/backend/auth",authRoutes)
 app.use("/backend/posts",postRoutes)
 app.use("/backend/users",userRoutes)
+// const User = {
+//   getJwtToken: function () {
+//     const payload = { id: this.id };
+//     // Generate the JWT
+//     const token = jwt.sign(payload, "secret key", { expiresIn: 3600 });
+
+//     return token;
+//   },
+// };
+
+//export default User;
 
 app.listen(4000,()=>{
 	console.log("connected")
