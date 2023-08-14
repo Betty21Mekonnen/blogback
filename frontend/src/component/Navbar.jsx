@@ -7,7 +7,6 @@ import { useContext } from 'react';
 export default function Navbar() {
   const {currentUser , logout}=useContext(AuthContext)
   const [showMenu, setShowMenu] = useState(false);
-
   const handleMenuToggle = () => {
     setShowMenu(!showMenu);
   };
@@ -16,16 +15,17 @@ export default function Navbar() {
     <div className="shadow-lg">
       <div className="flex justify-between items-center py-2 px-10">
         <div className="logo">
-          <img className="h-16 w-18" src={Logo} alt="logo" />
+          <Link to="/">
+          <img className="h-16 w-18" src={Logo} alt="logo" /></Link>
         </div>
         <div className={`hidden lg:flex gap-2.5 items-center ${showMenu ? '' : 'hidden'}`}>
           <Link to="/?cat=art">
             <h6 className="text-base">Art</h6>
           </Link>
-          <Link to="/?cat=scince">
+          <Link to="/?cat=science">
             <h6 className="text-base">Science</h6>
           </Link>
-          <Link to="/?cat=technology?">
+          <Link to="/?cat=Technology">
             <h6 className="text-base">Technology</h6>
           </Link>
           <Link to="/?cat=cinema">
@@ -44,7 +44,7 @@ export default function Navbar() {
          <Link to="/login">Login</Link>
          }
           <span className="cursor-pointer border rounded-full h-10 w-12 px-1 py-1.5 bg-blue-100">
-            <Link to="./write">Write</Link>
+            <Link to="/write">Write</Link>
           </span>
           <button className="lg:hidden" onClick={handleMenuToggle}>
             <svg
