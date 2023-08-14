@@ -5,6 +5,7 @@ import Write from "./pages/Write";
 import Single from "./pages/Single";
 import Navbar from "./component/Navbar";
 import Footer from "./component/Footer";
+import Mapofthis from "./pages/userprofile";
 import {
   createBrowserRouter,
   Outlet,
@@ -29,13 +30,17 @@ const router = createBrowserRouter([
         element: <Home/>,
       },
       {
-        path: "/Writer",
+        path: "/Write",
         element: <Write/>,
       },
       {
         path: "/post/:id",
         element: <Single/>,
       },
+  {
+    path:"/user/:id",
+    element:<Mapofthis/>
+  }
     ]
   },
   {
@@ -45,7 +50,7 @@ const router = createBrowserRouter([
   {
     path: "/Register",
     element: <Register/>,
-  },
+  }
 ]);
 
 function App() {
@@ -57,3 +62,32 @@ function App() {
 }
 
 export default App
+
+// App.js
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import Home from "./pages/Home"
+// import Login from "./pages/Login";
+// import Register from "./pages/Register";
+// import Write from "./pages/Write";
+// import Single from "./pages/Single";
+// import Navbar from "./component/Navbar";
+// import Footer from "./component/Footer";
+// import Mapofthis from "./pages/userprofile";
+// function App() {
+//   return (
+//     <div className="">
+//       <Navbar/>
+//       <Routes>
+//         <Route path="/" element={<Home />} />
+//         <Route path="/Write" element={<Write />} />
+//         <Route path="/post/:id" element={<Single />} />
+//         <Route path="/Login" element={<Login />} />
+//         <Route path="/Register" element={<Register />} />
+//         <Route path="/Mapofthis" element={<Mapofthis />} />
+//       </Routes>
+//       <Footer/>
+//     </div>
+//   )
+// }
+
+// export default App
