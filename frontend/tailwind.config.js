@@ -6,7 +6,19 @@ export default {
   ],
 
   theme: {
-    extend: {},
+    extend: {
+      width:{
+        '3/10':'30%',
+        '7/10': '70%'
+      },
+      color:{
+        "blackk":"#333"
+      },
+      hight:{
+        'h-30':'300px'
+      },
+     
+    },
   },
   plugins: [],
 }
