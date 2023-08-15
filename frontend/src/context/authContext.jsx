@@ -15,6 +15,7 @@ export const AuthContextProvider=({children})=>{
 		});
     response.json()
     .then(user => {setCurrentUser(user)})
+    //.then(user => {setCurrentUser(user.user)})
     setLoginResponse(response.status);
   }
   const logout = async () => {    
@@ -22,7 +23,9 @@ export const AuthContextProvider=({children})=>{
       method: 'POST',
       credentials: 'include',  
     });
+    //navigate("/")
     setCurrentUser(null);
+  
   }
 
   useEffect(() => {   
@@ -31,10 +34,11 @@ export const AuthContextProvider=({children})=>{
     }    
   }, [currentUser]);
 
-  return (    
+  return (  
     <AuthContext.Provider value={{currentUser, login, logout,loginResponse}}>      
       {children}      
     </AuthContext.Provider>
+  
   )
 
 }

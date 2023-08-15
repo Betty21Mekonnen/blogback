@@ -6,11 +6,7 @@ import Single from "./pages/Single";
 import Navbar from "./component/Navbar";
 import Footer from "./component/Footer";
 import Mapofthis from "./pages/userprofile";
-import {
-  createBrowserRouter,
-  Outlet,
-  RouterProvider,
-} from "react-router-dom";
+import {createBrowserRouter,Outlet,RouterProvider,} from "react-router-dom";
 const Layout=()=>{
   return(
   <>

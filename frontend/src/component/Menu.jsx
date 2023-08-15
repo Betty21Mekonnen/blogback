@@ -26,7 +26,7 @@ export default function Menu({cat}) {
 	// 	              }
 	// 	          ]
   return (
-	<div className="w-3/10">
+	<div className="md:w-3/10">
 		<h3 className='pb-4 font-bold'>Other Posts You May Like</h3>
          <div className='flex flex-col gap-20'>
        {posts.map((post)=>(

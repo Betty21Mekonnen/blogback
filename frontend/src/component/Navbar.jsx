@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/image2.png';
 import '../pages/Write';
 import { AuthContext } from '../context/authContext';
@@ -10,7 +10,11 @@ export default function Navbar() {
   const handleMenuToggle = () => {
     setShowMenu(!showMenu);
   };
-
+    const navigate=useNavigate()
+  const handleLogout = () => {
+    logout();
+    navigate('/'); // Redirect to the home page after logout
+  };
   return (
     <div className="shadow-lg">
       <div className="flex justify-between items-center py-2 px-10">
@@ -39,8 +43,8 @@ export default function Navbar() {
           </Link>
         </div>
         <div className="flex gap-2.5 items-center">
-          <span className="cursor-pointer">{currentUser?.username}</span>
-         {currentUser ? (<span onClick={logout} className="cursor-pointer">Logout</span>):
+        <Link to={`/user/${currentUser?.id}`} className="cursor-pointer">{currentUser?.username}</Link>
+         {currentUser ? (<span onClick={handleLogout} className="cursor-pointer">Logout</span>):
          <Link to="/login">Login</Link>
          }
           <span className="cursor-pointer border rounded-full h-10 w-12 px-1 py-1.5 bg-blue-100">

@@ -4,7 +4,6 @@ import userRoutes from './routes/users.js'
 import authRoutes from './routes/auth.js'
 import cookieParser from "cookie-parser"
 import multer from "multer"
-import jwt from 'jsonwebtoken'
 const app=express()
 app.use(cookieParser())
 app.use(express.json())
@@ -34,7 +33,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage })
 app.post('/backend/upload', upload.single('file'), function (req, res) {
   const file=req.file
-   res.status(200).json(file.filename)
+   res.status(200).json(file?.filename)
 })
 app.use("/backend/auth",authRoutes)
 app.use("/backend/posts",postRoutes)

@@ -58,17 +58,6 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // const response = await fetch('http://localhost:4000/backend/auth/log', {
-      //   method: 'POST',
-      //   credentials: 'include',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify(inputs)  
-      // });
-      // if(response.status === 200) {
-      //   navigate("/")
-      // }
       if(inputs.email==="" || inputs.password===""){
           alert("Please fill in all required fields.")
        return;
