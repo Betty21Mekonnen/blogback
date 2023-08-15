@@ -95,7 +95,7 @@ db.query(q,[values],(err,data)=>{
 	})
 }
 export const getcomments=(req,res)=>{
-	const q="SELECT c.postid, `username`, `comment` FROM users u JOIN comments c ON u.id=c.uid WHERE c.postid=?"
+	const q="SELECT c.postid, `username`,u.`img` AS userImg, `comment` FROM users u JOIN comments c ON u.id=c.uid WHERE c.postid=?"
 	  db.query(q,[req.params.id],(err,data)=>{
 		if(err){ console.log(err)
 	       return res.status(500).json(err);
