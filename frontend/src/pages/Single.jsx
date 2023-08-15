@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useContext } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { Eraser, Trash } from 'phosphor-react';
@@ -84,39 +85,41 @@ export default function Single() {
   const displayedComments = showAllComments ? comments : comments.slice(0, 2);
 
   return (
-    <div className="flex gap-20 px-8 py-4">
-      <div className="w-7/10">
-        <img className="w-screen max-h-96" src={`../upload/${post?.img}`} alt="" />
-        <div className="flex items-center">
-         <Link to={`/user/${post.userId}`}>  {post.userImg ? (
-            <img src={post.userImg} alt="" className="w-12 h-12 border rounded-full" />
-          ) : (
-            <div className="w-8 h-8 border rounded-full flex items-center justify-center text-white bg-teal-500">
-              <Avatar style={{ backgroundColor: 'teal' }}>{post.username?.charAt(0)} </Avatar>
-            </div>
-          )}</Link>
-          <div>
+    <div className="flex flex-col md:flex-row gap-20 px-8 py-4">
+      <div className="w-full md:w-7/10">
+        <img className="w-full h-auto max-h-96" src={`../upload/${post?.img}`} alt="" />
+        <div className="flex items-center mt-4">
+          <Link to={`/user/${post.userId}`}>
+            {post.userImg ? (
+              <img src={`../upload/${post?.userImg}`} alt="" className="w-12 h-12 border rounded-full" />
+            ) : (
+              <div className="w-8 h-8 border rounded-full flex items-center justify-center text-white bg-teal-500">
+                <Avatar style={{ backgroundColor: 'teal' }}>{post.username?.charAt(0)}</Avatar>
+              </div>
+            )}
+          </Link>
+          <div className="ml-2">
             <p>{post.username}</p>
             <p className="text-xs">{moment(post.date).fromNow()}</p>
           </div>
           {currentUser?.username === post.username && (
             <div>
-              <Link to="/Write?edit=2" state={post}>
+              <Link to={`/Write?edit=${post.id}`} state={post}>
                 <Eraser size={32} color="#2a00fa" weight="fill" className="cursor-pointer" />
               </Link>
               <Trash size={32} color="#fa0000" className="cursor-pointer" onClick={handleDelete} />
             </div>
           )}
         </div>
-        <div className="flex flex-col gap-4 m-4">
+        <div className="flex flex-col gap-4 mt-4">
           <h1 className="text-2xl font-bold mb-4 capitalize">{post.title}</h1>
           <p className="text-justify capitalize mb-4">{getText(post.descr)}</p>
 
           <div>
-          {displayedComments.map((comm) => (
-              <div className="flex items-center">
-                {post.userImg ? (
-                  <img src={post.userImg} alt="" className="w-12 h-12 border rounded-full" />
+            {displayedComments.map((comm) => (
+              <div className="flex items-center mb-4">
+                {comm.userImg ? (
+                  <img src={`../upload/${comm?.userImg}`} alt="" className="w-8 h-8 border rounded-full" />
                 ) : (
                   <div className="w-6 h-6 border rounded-full flex items-center justify-center text-white bg-teal-500">
                     <Avatar style={{ backgroundColor: 'teal' }}>{comm.username.charAt(0)}</Avatar>
@@ -133,14 +136,14 @@ export default function Single() {
             ))}
           </div>
           {comments.length > 2 && (
-           <button
-           className="italic text-bold  mt-2 cursor-pointer"
-           onClick={toggleComments}
-         >
-           {showAllComments ? 'View Less' : `View All ${comments.length} Comments `}
-         </button>
+            <button
+              className="italic text-bold mt-2 cursor-pointer"
+              onClick={toggleComments}
+            >
+              {showAllComments ? 'View Less' : `View All ${comments.length} Comments `}
+            </button>
           )}
-         <div className="pt-1 pl-3 pb-3 shadow-xl border border-t-2">
+          <div className="pt-1 pl-3 pb-3 shadow-xl border border-t-2 mt-4">
             <p className="text-lg font-bold mb-2 capitalize ml-4">Add your comment here!</p>
             <form onSubmit={addComment}>
               <TextareaAutosize
@@ -150,10 +153,14 @@ export default function Single() {
                 aria-label="minimum height"
                 minRows={3}
                 placeholder="Add a comment..."
-                style={{ width: 500, padding: '5px' }}
+                style={{ width: '100%', padding: '5px' }}
               />
               <div className="pt-1">
-                <button type="submit" className="bg-teal-600 text-white rounded p-1.5 ml-8" disabled={!comment}>
+                <button
+                  type="submit"
+                  className="bg-teal-600 text-white rounded p-1.5 ml-8"
+                  disabled={!comment}
+                >
                   Comment
                 </button>
               </div>
@@ -161,7 +168,7 @@ export default function Single() {
           </div>
         </div>
       </div>
-      <Menu cat={post.cat} />
+      <Menu cat={post?.cat} />
     </div>
   );
 }
