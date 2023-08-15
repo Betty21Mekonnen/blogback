@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import useRegisterForm from "../validation/IsFormValid";
 import image2 from"../assets/image2.png"
 const Register = () => {
-  const { user, errors, isSubmitting, handleChange, handleSubmit } =
+  const { inputs, errors, isSubmitting, handleChange, handleSubmit } =
     useRegisterForm();
 
   return (
@@ -38,6 +38,7 @@ const Register = () => {
                       </label>
                       <div className="mt-2">
                         <input
+                          value={inputs.username}
                           onChange={handleChange}
                           name="username"
                           type="text"
@@ -58,6 +59,7 @@ const Register = () => {
                       </label>
                       <div className="mt-2">
                         <input
+                        value={inputs.email}
                           onChange={handleChange}
                           name="email"
                           type="email"
@@ -76,6 +78,7 @@ const Register = () => {
                       </label>
                       <div className="mt-2">
                         <input
+                          value={inputs.password}
                           onChange={handleChange}
                           name="password"
                           type="password"
