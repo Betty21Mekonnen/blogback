@@ -1,6 +1,8 @@
 import {db} from '../db.js'
 import bcrypt from 'bcrypt'
 import jwt from'jsonwebtoken'
+//import User from '../index.js';
+
 export const register=(req,res)=>{
 	const q="select *from users WHERE email=? OR username=?"
 	db.query(q,[req.body.email,req.body.name],(err,data)=>{
@@ -16,6 +18,14 @@ export const register=(req,res)=>{
 		})
 	});
 } ;
+// export const isAuthenticated = async(req, res, next) => {
+//    const token =  req.cookies.token
+//    console.log(req.headers)
+//    if(!token) return res.status(401).json("Not authenticated user")
+//   jwt.verify(token,"secret key" , (err,userInfo)=>{
+// 	if (err) return res.status(403).json("Token is not valid")
+//   })
+// }
 export const login = async(req,res)=>{
 	const q="SELECT *FROM users WHERE email=?";
 	db.query(q,[req.body.email],(err,data)=>{
@@ -24,23 +34,47 @@ export const login = async(req,res)=>{
 		if(data.length === 0) return res.status(400).json("user not found!")
 		const ispasswordcorrect = bcrypt.compareSync(req.body.password,data[0].password);
 		if(!ispasswordcorrect) return res.status(400).json("Wrong email or password")
-		const token = jwt.sign({ id: data[0].id }, "jwtnewkey");
-        const { password, ...other } = data[0];
 		
-	   if(ispasswordcorrect){
-		res.cookie('newtoken', token, {
-		httpOnly: true, 
-		sameSite: 'none',
-		secure: true, 
+	const token = jwt.sign({ id: data[0].id }, "jwtnewkey", { expiresIn: "24h" });
+       const { password, ...other } = data[0];
+		
+    if(ispasswordcorrect){
+ 	res.cookie('token', token, {
+ 		httpOnly: true, 
+ 		sameSite: 'none',
+ 		secure: true, 
+		path: '/',
 		
 	  }).status(200)
-	  .json(other);
+	  .json({token,...other});
 	}
+   //sendTokenResponse(data[0], 200, res);
 	});
-}
+ }
 export const logout = (req, res) => {
-	res.clearCookie("newtoken",{
+	res.clearCookie("token",{
 	  sameSite:"none",
 	  secure:true
 	}).status(200).json("User has been logged out.")
+	
   };
+  //new ketach
+//   const sendTokenResponse = async (user, codeStatus, res)=>{
+//     const token = User.getJwtToken();
+// 	//console.log(token)
+//     res
+//         .status(codeStatus)
+//         .cookie(
+// 			res.cookie('token', token, {
+// 				maxAge: 60 * 60 * 1000,
+// 				httpOnly: true, 
+// 				sameSite: 'none',
+// 				secure: true, 
+// 			}))
+//             .json({
+//                 success: true,
+//                 user,
+// 				id:user.id
+//             })
+			
+// }
