@@ -4,14 +4,15 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import moment from 'moment';
-
+import writevalidation from '../validation/Validation';
 export default function Write() {
   const state = useLocation().state;
   const [value, setValue] = useState(state?.descr || '');
   const [title, setTitle] = useState(state?.title || '');
   const [cat, setCat] = useState(state?.cat || '');
   const [file, setFile] = useState();
-
+  const [errors,seterrors]=useState([])
+ 
   const upload = async () => {
     try {
       const formData = new FormData();
@@ -30,6 +31,13 @@ export default function Write() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
+    const errors = writevalidation(title, value, cat, file);
+    if (errors !== null) {
+      seterrors(errors)
+      console.log(errors)
+      return; 
+    }
+    if(errors==null){
     e.preventDefault();
     const imgurl = await upload();
     try {
@@ -56,9 +64,8 @@ export default function Write() {
       }
     } catch (err) {
       console.log(err);
-    }
+    }}
   };
-
   return (
     <div className='flex flex-col md:flex-row gap-5 mt-5'>
       <div className='flex flex-col gap-5 w-full md:w-7/12'>
@@ -69,10 +76,18 @@ export default function Write() {
           placeholder='Title'
           onChange={(e) => setTitle(e.target.value)}
         />
+       {errors.find(error => error.title) && <p className='text-red-500'>{errors.find(error => error.title).title}</p>} 
+
         <div className='h-80 overflow-scroll'>
-          <ReactQuill className='h-full' theme='snow' value={value} onChange={setValue} />
+          <ReactQuill className='h-full' theme='snow' value={value} onChange={setValue}  />
         </div>
+        {errors.find((error) => error.value) && (
+        <p className='text-red-500'>
+          {errors.find((error) => error.value).value}
+        </p>
+      )}
       </div>
+     
       <div className='w-full md:w-5/12 flex flex-col gap-5'>
         <div className='p-2 border border-gray-300 p-10px flex-1 flex flex-col justify-between'>
           <h1>Publish</h1>
@@ -86,6 +101,7 @@ export default function Write() {
           <label htmlFor='file' className='cursor-pointer'>
             Upload Image
           </label>
+          {errors.find(error => error.image) && <p className='text-red-500'>{errors.find(error => error.image).image}</p>} 
           <div className='flex justify-end'>
             <button className='text-teal-600 border border-teal-600 p-1 mr-1'>Save as draft</button>
             <button onClick={handleSubmit} className='bg-teal-600 text-white p-1.5'>
@@ -138,6 +154,7 @@ export default function Write() {
               onChange={(e) => setCat(e.target.value)}
             />
             <label htmlFor='Food'>Food</label>
+            {errors.find(error => error.cat) && <p className='text-red-500'>{errors.find(error => error.cat).cat}</p>} 
           </div>
         </div>
       </div>
