@@ -8,16 +8,28 @@ export const getposts=(req,res)=>{
 	}) 
 }
 export const getpost=(req,res)=>{
-const q="SELECT p.id,u.id AS userId , `username`, `title`, `descr` , p.img,u.img AS userImg ,`cat`, `date` FROM users u JOIN posts p ON u.id=p.uid WHERE p.id=?"
+const q="SELECT p.id,u.id AS userId , `username`, `title`, `descr` , p.img,u.img AS userImg ,`cat`, `date` FROM posts p LEFT JOIN users u ON u.id = p.uid WHERE p.id = ?";
   db.query(q,[req.params.id],(err,data)=>{
 	if(err) console.log(err)
 	//return res.status(500).json(err);
-	
+	//console.log(data)
 	return res.status(200).json(data[0])
 	
   })
 }
+// export const getpost=(req,res)=>{
+// const q = "SELECT p.id, u.id AS userId, `username`, `title`, `descr`, p.img, u.img AS userImg, `cat`, `date` FROM posts p LEFT JOIN users u ON u.id = p.uid WHERE p.id = ?";
 
+// db.query(q, [req.params.id], (err, data) => {
+//   if (err) {
+//     console.log(err);
+//     return res.status(500).json(err);
+//   }
+  
+//   console.log(data);
+//   return res.status(200).json(data[0]);
+// });
+// }
 export const addpost=(req,res)=>{
 	 const token =  req.cookies.token
 	 //console.log(token)
@@ -95,7 +107,7 @@ db.query(q,[values],(err,data)=>{
 	})
 }
 export const getcomments=(req,res)=>{
-	const q="SELECT c.postid, `username`,u.`img` AS userImg, `comment` FROM users u JOIN comments c ON u.id=c.uid WHERE c.postid=?"
+	const q="SELECT c.postid, `username`,u.`img` AS userImg, `comment` FROM users u LEFT JOIN  comments c ON u.id=c.uid WHERE c.postid=?"
 	  db.query(q,[req.params.id],(err,data)=>{
 		if(err){ console.log(err)
 	       return res.status(500).json(err);
