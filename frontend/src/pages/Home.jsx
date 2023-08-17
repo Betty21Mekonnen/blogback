@@ -15,6 +15,7 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const res = await axios.get(`http://localhost:4000/backend/posts${cat}`);
+        console.log(res.data)
         setPosts(res.data);
       } catch (err) {
         console.log(err);
@@ -33,7 +34,7 @@ export default function Home() {
     const doc = new DOMParser().parseFromString(html, 'text/html');
     return doc.body.textContent;
   };
-
+console.log(currentUser)
   return (
     <div>
       <div className="mt-10 flex flex-col gap-12">
@@ -47,18 +48,18 @@ export default function Home() {
                 <p className="text-2xl font-bold mb-4 capitalize">{post.title}</p>
               </Link>
               <p className="mb-4">{getText(post.descr.slice(0, 1000))}</p>
-              {currentUser ? (
-                <Link
-                  to={`/post/${post.id}`}
-                  className="p-2 rounded border border-teal-500 hover:bg-teal-500 hover:text-white text-teal-600 cursor-pointer"
-                >
-                  Read More
-                </Link>
-              ) : (
-                <Link className="italic text-teal-600 hover:text-xl" to="/Login">
-                  Please Login and Read More
-                </Link>
-              )}
+              {currentUser && !currentUser.hasOwnProperty('message') ? (
+  <Link
+    to={`/post/${post.id}`}
+    className="p-2 rounded border border-teal-500 hover:bg-teal-500 hover:text-white text-teal-600 cursor-pointer"
+  >
+    Read More
+  </Link>
+) : (
+  <Link className="italic text-teal-600 hover:text-xl" to="/Login">
+    Please Login and Read More
+  </Link>
+)}
             </div>
           </div>
         ))}

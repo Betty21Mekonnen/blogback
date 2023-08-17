@@ -31,7 +31,7 @@ export default function Login() {
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting,    setSubmitted] = useState(false);
-  const {login,loginResponse}=useContext(AuthContext)
+  const {login,loginResponse,logout,currentUser}=useContext(AuthContext)
   const handleChange=(e)=>{
     const { name, value } = e.target;
 
@@ -53,9 +53,9 @@ export default function Login() {
     }
     setInputs(prev=>({...prev,[e.target.name]:e.target.value}))
     
-  }
+     }
   const noErrors = Object.values(errors).every((error) => !error);
-  const handleSubmit = async (e) => {
+   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if(inputs.email==="" || inputs.password===""){
@@ -63,26 +63,28 @@ export default function Login() {
        return;
       }
       if(noErrors){
-        console.log(loginResponse)
+       // console.log(loginResponse)
       await login(inputs)
-      if(loginResponse===200) {
-        navigate("/");
-      }
+      // if(loginResponse===200) {
+      //   navigate("/");
+      // }
     }
     else{
       setSubmitted(true)
-    }
-      
+    }  
     } catch(err) {
       console.error(err);
     }
+    
   } 
-  // useEffect(() => {
-  //   if (loginResponse === 200) {
-  //   navigate("/");
-  //   }
-  //   }, [loginResponse]);
-  return (
+  useEffect(() => {
+    if (loginResponse === 200) {
+    navigate("/");
+    }
+    }, [loginResponse]);
+ 
+  const error=currentUser?.message
+  return ( 
 	<div className="h-screen">
   <div className="h-full">
     <div className="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
@@ -91,6 +93,8 @@ export default function Login() {
 		    <p className="text-3xl font-bold font-serif md:text-lg pt-5 text-center">WELCOME!</p> 
       </div>
       <div className="mb-12 md:mb-0 md:w-8/12 lg:w-5/12 xl:w-5/12">
+      <div className="text-red-500 flex justify-center">{error!=null?
+       (error):"" }</div>
         <form className='shadow-lg'>
 		       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -104,11 +108,10 @@ export default function Login() {
               <div className="mt-2">
                <input onChange={handleChange} id="email" name="email" type="email" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
                {isSubmitting && errors.email && (
-                          <p className="text-red-500 text-sm">{errors.email}</p>
+                          <p  >{errors.email}</p>
                         )}
               </div>
              </div>
-
             <div>
              <div className="flex items-center justify-between">
                <label  className="block text-sm font-medium leading-6 text-gray-900">Password</label>

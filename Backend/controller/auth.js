@@ -26,30 +26,39 @@ export const register=(req,res)=>{
 // 	if (err) return res.status(403).json("Token is not valid")
 //   })
 // }
-export const login = async(req,res)=>{
-	const q="SELECT *FROM users WHERE email=?";
-	db.query(q,[req.body.email],(err,data)=>{
-		
-		if(err) return res.json(err)
-		if(data.length === 0) return res.status(400).json("user not found!")
-		const ispasswordcorrect = bcrypt.compareSync(req.body.password,data[0].password);
-		if(!ispasswordcorrect) return res.status(400).json("Wrong email or password")
-		
-	const token = jwt.sign({ id: data[0].id }, "jwtnewkey", { expiresIn: "24h" });
-       const { password, ...other } = data[0];
-		
-    if(ispasswordcorrect){
- 	res.cookie('token', token, {
- 		httpOnly: true, 
- 		sameSite: 'none',
- 		secure: true, 
-		path: '/',
-		
-	  }).status(200)
-	  .json({token,...other});
-	}
+export const login = (req, res) => {
+	const q = "SELECT * FROM users WHERE email=?";
+	db.query(q, [req.body.email], (err, data) => {
+	  if (err) return res.json(err);
+	  if (data.length === 0){
+		return res.status(400).json({ message: "User not found!" });
+	  }
+	  const isPasswordCorrect = bcrypt.compareSync(
+		req.body.password,
+		data[0].password
+	  );
+	  if (!isPasswordCorrect)
+		return res.status(400).json({ message: "Wrong email or password" });
+	  const token = jwt.sign({ id: data[0].id }, "jwtnewkey", {
+		expiresIn: "24h",
+	  });
+	  const { password, ...other } = data[0];
+  
+	  if (isPasswordCorrect) {
+		res
+		  .cookie("token", token, {
+			httpOnly: true,
+			sameSite: "none",
+			secure: true,
+			path: "/",
+		  })
+		  .status(200)
+		  .json({ ...other });
+	  }
+	  
    //sendTokenResponse(data[0], 200, res);
 	});
+
  }
 export const logout = (req, res) => {
 	res.clearCookie("token",{
