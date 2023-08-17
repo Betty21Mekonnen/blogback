@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useContext } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { Eraser, Trash } from 'phosphor-react';
@@ -56,6 +55,7 @@ export default function Single() {
     }
   };
 
+
   const addComment = async (e) => {
     e.preventDefault();
     try {
@@ -68,6 +68,7 @@ export default function Single() {
         }
       );
       setComment('');
+      alert(data.message) 
     } catch (error) {
       console.log(error);
     }
@@ -152,11 +153,11 @@ export default function Single() {
               style={{ width: '100%', padding: '5px' }}
             />
             <div className="pt-1">
-              <button
-                type="submit"
-                className="bg-teal-600 text-white rounded p-1.5 ml-8"
-                disabled={!comment}
-              >
+            <button
+             type="submit"
+             className={`bg-teal-600 text-white rounded p-1.5 ml-8 ${!comment ? 'opacity-50 cursor-not-allowed' : ''}`}
+              disabled={!comment}
+            >
                 Comment
               </button>
             </div>

@@ -5,6 +5,7 @@ import { useContext} from 'react';
 import {  Link,useLocation,useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import axios from 'axios';
+import Avatar from '@mui/material/Avatar';
 export default function Mapofthis(){
     const {currentUser}=useContext(AuthContext)
     const [file, setFile] = useState();
@@ -103,7 +104,10 @@ export default function Mapofthis(){
         <div className='flex-col'>
         <input className='hidden' type='file' id='file' onChange={(e) => setFile(e.target.files[0])} />
           <label htmlFor='file' className='cursor-pointer'>
-          <img src={`../upload/${posts[0]?.userImg}`} alt="" className="w-20 h-20 border rounded-full" />
+          {posts[0]?.userImg?<img src={`../upload/${posts[0]?.userImg}`} alt="" className="w-20 h-20 border rounded-full" />:
+          <div className="w-12 h-12 border rounded-full flex items-center justify-center text-white bg-teal-500">
+          <Avatar style={{ backgroundColor: 'teal' }}>{posts[0]?.username.charAt(0)}</Avatar>
+        </div>}
           </label>
       <p>{posts[0]?.username}</p>
       </div>
