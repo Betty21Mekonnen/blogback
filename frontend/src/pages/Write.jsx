@@ -53,13 +53,14 @@ export default function Write() {
           img: file ? imgurl : '',
         }, config);
       } else {
-        await axios.post(`http://localhost:4000/backend/posts/`, {
+        const { data } =await axios.post(`http://localhost:4000/backend/posts/`, {
           title: title,
           descr: value,
           cat: cat,
           img: file ? imgurl : '',
           date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
         }, config);
+        alert(data.message)
         navigate('/');
       }
     } catch (err) {

@@ -4,7 +4,8 @@ export const getposts=(req,res)=>{
 	const q= req.query.cat? "SELECT*FROM posts WHERE cat=?" : "SELECT * FROM posts";
     db.query(q,[req.query.cat],(err,data)=>{
 		if(err) return res.send(err)
-		return res.status(200).json(data)
+     	return res.status(200).json(data)
+		
 	}) 
 }
 export const getpost=(req,res)=>{
@@ -47,7 +48,7 @@ const values =[
 ]
 db.query(q,[values],(err,data)=>{
 	if(err) return res.status(500).json(err)
-	return res.json("post has been created")
+	return res.json({message:"post has been created"})
 })
 	 })
 }
@@ -67,7 +68,7 @@ export const deletepost = (req, res) => {
 		} else if (data.affectedRows === 0) {
 		  return res.status(403).json("You can only delete your own post");
 		} else {
-		  return res.json("Post has been deleted!");
+		  return res.json({message:"Post has been deleted!"});
 		}
 	  });
 	});
@@ -86,7 +87,7 @@ export const updatepost=(req,res)=>{
 
     db.query(q, [...values, postId, userInfo.id], (err, data) => {
       if (err) return res.status(500).json(err);
-      return res.json("Post has been updated.");
+      return res.json({message:"Post has been updated."});
     });
   });
 }
@@ -102,7 +103,7 @@ export const addComment=(req,res)=>{
 const values =[postId ,userInfo.id,comment,date ]
 db.query(q,[values],(err,data)=>{
    if(err) return res.status(500).json(err)
-   return res.json("post has been created")
+   return res.json({message:"you add a comment here"})
 })
 	})
 }
