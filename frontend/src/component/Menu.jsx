@@ -6,7 +6,7 @@ export default function Menu({cat}) {
   useEffect(()=>{
     const fetchData=async()=>{
       try{
-        const res = await axios.get(`http://localhost:4000/backend/posts/?cat=${cat}`)
+        const res = await axios.get(`${REACT_APP_BACKEND_URL}/backend/posts/?cat=${cat}`)
         setPosts(res.data)
       }
       catch(err){

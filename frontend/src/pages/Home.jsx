@@ -14,7 +14,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/backend/posts${cat}`);
+        const res = await axios.get(`${REACT_APP_BACKEND_URL}/backend/posts${cat}`);
         console.log(res.data)
         setPosts(res.data);
       } catch (err) {

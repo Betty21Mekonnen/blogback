@@ -57,7 +57,7 @@ export default function Mapofthis(){
         e.preventDefault();
         const imgurl = await upload();
         try{
-          await axios.post(`http://localhost:4000/backend/users/${uid}`, {
+          await axios.post(`${REACT_APP_BACKEND_URL}/backend/users/${uid}`, {
             img: file ? imgurl : '',
           }, {withCredentials:true})
       } catch (err) {

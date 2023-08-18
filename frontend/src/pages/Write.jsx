@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../context/authContext';
 import moment from 'moment';
 import writevalidation from '../validation/Validation';
 export default function Write() {
@@ -12,6 +14,7 @@ export default function Write() {
   const [cat, setCat] = useState(state?.cat || '');
   const [file, setFile] = useState();
   const [errors,seterrors]=useState([])
+  const {currentUser}=useContext(AuthContext)
  
   const upload = async () => {
     try {
@@ -53,20 +56,27 @@ export default function Write() {
           img: file ? imgurl : '',
         }, config);
       } else {
-        const { data } =await axios.post(`http://localhost:4000/backend/posts/`, {
+        const { data } =await axios.post(`${REACT_APP_BACKEND_URL}/backend/posts/`, {
           title: title,
           descr: value,
           cat: cat,
           img: file ? imgurl : '',
           date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
         }, config);
-        alert(data.message)
-        navigate('/');
+        // alert(data.message)
+        // navigate('/');
       }
     } catch (err) {
       console.log(err);
     }}
+    const error=currentUser?.message
+    if(error!=null){
+      alert(error)
+    }
+   
+    navigate('/');
   };
+
   return (
     <div className='flex flex-col md:flex-row gap-5 mt-5'>
       <div className='flex flex-col gap-5 w-full md:w-7/12'>
@@ -88,7 +98,7 @@ export default function Write() {
         </p>
       )}
       </div>
-     
+    
       <div className='w-full md:w-5/12 flex flex-col gap-5'>
         <div className='p-2 border border-gray-300 p-10px flex-1 flex flex-col justify-between'>
           <h1>Publish</h1>

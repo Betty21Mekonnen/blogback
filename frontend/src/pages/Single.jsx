@@ -20,7 +20,7 @@ export default function Single() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/backend/posts/${postId}`);
+        const res = await axios.get(`${REACT_APP_BACKEND_URL}/backend/posts/${postId}`);
         setPost(res.data);
       } catch (err) {
         console.log(err);

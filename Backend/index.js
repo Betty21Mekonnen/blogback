@@ -4,6 +4,8 @@ import userRoutes from './routes/users.js'
 import authRoutes from './routes/auth.js'
 import cookieParser from "cookie-parser"
 import multer from "multer"
+import dotenv from 'dotenv';
+dotenv.config();
 const app=express()
 app.use(cookieParser())
 app.use(express.json())
@@ -49,7 +51,7 @@ app.use("/backend/users",userRoutes)
 // };
 
 //export default User;
-
-app.listen(4000,()=>{
-	console.log("connected")
+const port=process.env.PORT||4000
+app.listen(port,()=>{
+	console.log("server connected")
 })
