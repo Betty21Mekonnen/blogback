@@ -49,7 +49,7 @@ export default function Write() {
       };
 
       if (state) {
-        await axios.put(`http://localhost:4000/backend/posts/${state.id}`, {
+        await axios.put(`${REACT_APP_BACKEND_URL}/backend/posts/${state.id}`, {
           title,
           descr: value,
           cat,
