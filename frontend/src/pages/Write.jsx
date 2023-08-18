@@ -20,7 +20,7 @@ export default function Write() {
     try {
       const formData = new FormData();
       formData.append('file', file);
-      const res = await axios.post('http://localhost:4000/backend/upload', formData, {
+      const res = await axios.post(`${REACT_APP_BACKEND_URL}/backend/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
