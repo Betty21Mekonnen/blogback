@@ -10,7 +10,8 @@ const app=express()
 app.use(cookieParser())
 app.use(express.json())
 import cors from 'cors'
-const allowedOrigin =['http://127.0.0.1:5173','https://blogging-steel.vercel.app'];
+// 'http://127.0.0.1:5173'
+const allowedOrigin ='https://blogging-steel.vercel.app'
 app.use(cors({
   origin: allowedOrigin,
   credentials: true 
