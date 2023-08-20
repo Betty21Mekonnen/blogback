@@ -1,6 +1,6 @@
 import { db } from "../db.js"
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 export const getpost=(req,res)=>{
     //const q="SELECT*FROM posts  WHERE uid=?"
 	//const q="SELECT p.id,u.id AS userId , `username`, `title`, `descr` , p.img,u.img AS userImg ,`cat`, `date` FROM users u JOIN posts p ON u.id=p.uid WHERE p.uid=?"
