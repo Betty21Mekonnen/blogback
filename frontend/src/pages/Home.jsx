@@ -14,8 +14,8 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
         const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/backend/posts${cat}`);
+        res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
         console.log(res.data)
         setPosts(res.data);
       } catch (err) {
