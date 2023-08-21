@@ -84,7 +84,7 @@ export default function Single() {
   };
 
   const displayedComments = showAllComments ? comments : comments.slice(0, 2);
-
+ console.log(post.img)
   return (
     <div className="flex flex-col md:flex-row gap-20 px-8 py-4" key={post?.id}>
     <div className="w-full md:w-7/10">
