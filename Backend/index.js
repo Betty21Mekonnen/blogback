@@ -12,7 +12,7 @@ app.use(express.json())
 import cors from 'cors'
 app.use(cors());
 //'http://127.0.0.1:5173'
-const allowedOrigin ='https://blogging-4t6jrmp5i-betelhemmekonnen.vercel.app'
+const allowedOrigin ='https://blogging-git-master-betelhemmekonnen.vercel.app' 
 app.use(cors({
   origin: allowedOrigin,
   credentials: true 
