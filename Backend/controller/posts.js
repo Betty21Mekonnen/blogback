@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 export const getposts=(req,res)=>{
 	const q= req.query.cat? "SELECT*FROM posts WHERE cat=?" : "SELECT * FROM posts";
     db.query(q,[req.query.cat],(err,data)=>{
-		console.log(data)
 		if(err) return res.send(err)
      	return res.status(200).json(data)
 
