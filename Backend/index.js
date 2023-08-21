@@ -11,24 +11,24 @@ app.use(cookieParser())
 app.use(express.json())
 import cors from 'cors'
 app.use(cors());
-// 'http://127.0.0.1:5173'
-// const allowedOrigin ='https://blogging-steel.vercel.app'
-// app.use(cors({
-//   origin: allowedOrigin,
-//   credentials: true 
-// }));
-// app.options('*', cors()); 
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', allowedOrigin);
-//   next();
-// });
-
+//'http://127.0.0.1:5173'
+const allowedOrigin ='https://blogging-4t6jrmp5i-betelhemmekonnen.vercel.app'
+app.use(cors({
+  origin: allowedOrigin,
+  credentials: true 
+}));
+app.options('*', cors()); 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Origin', allowedOrigin);
   next();
 });
+
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//   next();
+// });
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
