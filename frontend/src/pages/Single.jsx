@@ -47,7 +47,7 @@ export default function Single() {
     try {
       await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/backend/posts/${postId}`, {
         method: 'DELETE',
-        withCredentials: true,
+        // withCredentials: true,
       });
       navigate('/');
     } catch (err) {
@@ -64,7 +64,7 @@ export default function Single() {
         { comment, date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss') },
         {
           method: 'post',
-          withCredentials: true,
+          // withCredentials: true,
         }
       );
       setComment('');
