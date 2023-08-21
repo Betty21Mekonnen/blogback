@@ -20,7 +20,7 @@ export default function Single() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${REACT_APP_BACKEND_URL}/backend/posts/${postId}`);
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/backend/posts/${postId}`);
         setPost(res.data);
       } catch (err) {
         console.log(err);
@@ -32,7 +32,7 @@ export default function Single() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/backend/posts/comment/${postId}`);
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/backend/posts/comment/${postId}`);
         setComments(res.data);
       } catch (err) {
         console.log(err);
@@ -45,7 +45,7 @@ export default function Single() {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:4000/backend/posts/${postId}`, {
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/backend/posts/${postId}`, {
         method: 'DELETE',
         withCredentials: true,
       });
@@ -60,7 +60,7 @@ export default function Single() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        `http://localhost:4000/backend/posts/comment/${postId}`,
+        `${import.meta.env.VITE_BACKEND_URL}/backend/posts/comment/${postId}`,
         { comment, date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss') },
         {
           method: 'post',

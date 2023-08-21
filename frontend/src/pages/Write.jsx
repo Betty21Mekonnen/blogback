@@ -20,7 +20,7 @@ export default function Write() {
     try {
       const formData = new FormData();
       formData.append('file', file);
-      const res = await axios.post(`${REACT_APP_BACKEND_URL}/backend/upload`, formData, {
+      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/backend/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -49,14 +49,14 @@ export default function Write() {
       };
 
       if (state) {
-        await axios.put(`${REACT_APP_BACKEND_URL}/backend/posts/${state.id}`, {
+        await axios.put(`${import.meta.env.VITE_BACKEND_URL}/backend/posts/${state.id}`, {
           title,
           descr: value,
           cat,
           img: file ? imgurl : '',
         }, config);
       } else {
-        const { data } =await axios.post(`${REACT_APP_BACKEND_URL}/backend/posts/`, {
+        const { data } =await axios.post(`${import.meta.env.VITE_BACKEND_URL}/backend/posts/`, {
           title: title,
           descr: value,
           cat: cat,
