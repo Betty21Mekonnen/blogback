@@ -9,20 +9,22 @@ dotenv.config();
 const app=express()
 app.use(cookieParser())
 app.use(express.json())
-import cors from 'cors'
-app.use(cors());
-//'http://127.0.0.1:5173'
-const allowedOrigin ='https://blogging-steel.vercel.app'
-app.use(cors({
+import cors from 'cors';
+
+const allowedOrigin = 'https://blogging-steel.vercel.app';
+const corsOptions = {
   origin: allowedOrigin,
-  credentials: true 
-}));
-app.options('*', cors()); 
+  credentials: true
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', allowedOrigin);
+  res.header('Access-Control-Allow-Credentials', 'true');
   next();
 });
-
 // app.use((req, res, next) => {
 //   res.header('Access-Control-Allow-Origin', '*');
 //   res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
