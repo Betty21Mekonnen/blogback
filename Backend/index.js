@@ -24,7 +24,7 @@ app.use(cors());
 // });
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://blogging-4t6jrmp5i-betelhemmekonnen.vercel.app');
+  res.header('Access-Control-Allow-Origin', 'https://https://blogging-git-master-betelhemmekonnen.vercel.app');
   res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
