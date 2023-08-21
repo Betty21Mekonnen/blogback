@@ -44,9 +44,9 @@ export default function Write() {
     e.preventDefault();
     const imgurl = await upload();
     try {
-      // const config = {
-      //   withCredentials: true,
-      // };
+      const config = {
+        withCredentials: true,
+      };
 
       if (state) {
         await axios.put(`${import.meta.env.VITE_BACKEND_URL}/backend/posts/${state.id}`, {
@@ -54,7 +54,7 @@ export default function Write() {
           descr: value,
           cat,
           img: file ? imgurl : '',
-        });
+        },config);
       } else {
         const { data } =await axios.post(`${import.meta.env.VITE_BACKEND_URL}/backend/posts/`, {
           title: title,
@@ -62,7 +62,7 @@ export default function Write() {
           cat: cat,
           img: file ? imgurl : '',
           date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
-        });
+        },config);
         // alert(data.message)
         // navigate('/');
       }

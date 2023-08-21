@@ -47,7 +47,7 @@ export default function Single() {
     try {
       await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/backend/posts/${postId}`, {
         method: 'DELETE',
-        // withCredentials: true,
+         withCredentials: true,
       });
       navigate('/');
     } catch (err) {

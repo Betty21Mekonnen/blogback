@@ -58,8 +58,8 @@ export default function Mapofthis(){
         const imgurl = await upload();
         try{
           await axios.post(`${import.meta.env.VITE_BACKEND_URL}/backend/users/${uid}`, {
-            img: file ? imgurl : ''})
-          //  , {withCredentials:true})
+            img: file ? imgurl : ''}
+           , {withCredentials:true})
       } catch (err) {
         console.log(err);
       }}

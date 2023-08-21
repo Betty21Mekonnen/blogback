@@ -64,17 +64,17 @@ const useRegisterForm = (callback) => {
       return;
     }
     try {
-      // const config = {
-      //   withCredentials: true,
-      // };
+      const config = {
+        withCredentials: true,
+      };
     if (noErrors) {
       try {
         if (state) {
           // Update existing user
-          await axios.put(`${import.meta.env.VITE_BACKEND_URL}/backend/users/${state.id}`, inputs);
+          await axios.put(`${import.meta.env.VITE_BACKEND_URL}/backend/users/${state.id}`, inputs),config;
         } else {
           // Register new user
-          await axios.post(`${import.meta.env.VITE_BACKEND_URL}/backend/auth/reg`, inputs);
+          await axios.post(`${import.meta.env.VITE_BACKEND_URL}/backend/auth/reg`, inputs,config);
         }
         navigate("/Login");
       } catch (err) {

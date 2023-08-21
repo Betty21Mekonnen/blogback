@@ -95,7 +95,7 @@ export const updatepost=(req,res)=>{
 export const addComment=(req,res)=>{
 	const token =  req.cookies.token
 	const {comment,date}=req.body;
-	//console.log(token)
+	console.log(token)
 	if(!token) return res.status(401).json("Not authenticated user")
 	 jwt.verify(token,"jwtnewkey" , (err,userInfo)=>{
 	   if (err) return res.status(403).json("Token is not valid")
