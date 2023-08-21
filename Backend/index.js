@@ -10,17 +10,18 @@ const app=express()
 app.use(cookieParser())
 app.use(express.json())
 import cors from 'cors'
+app.use(cors());
 // 'http://127.0.0.1:5173'
-const allowedOrigin ='https://blogging-steel.vercel.app'
-app.use(cors({
-  origin: allowedOrigin,
-  credentials: true 
-}));
-app.options('*', cors()); 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', allowedOrigin);
-  next();
-});
+// const allowedOrigin ='https://blogging-steel.vercel.app'
+// app.use(cors({
+//   origin: allowedOrigin,
+//   credentials: true 
+// }));
+// app.options('*', cors()); 
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', allowedOrigin);
+//   next();
+// });
 
 
 const storage = multer.diskStorage({
