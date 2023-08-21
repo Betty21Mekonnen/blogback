@@ -24,9 +24,9 @@ export default function Home() {
     fetchData();
   }, [cat]);
 
-  // const indexOfLastPost = currentPage * postsPerPage;
-  // const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  // const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -38,7 +38,7 @@ console.log(currentUser)
   return (
     <div>
       <div className="mt-10 flex flex-col gap-12">
-        {posts.map((post) => (
+        {currentPosts.map((post) => (
           <div className="flex flex-col md:flex-row md:gap-20" key={post.id}>
             <div className="md:w-1/3">
               <img className="w-full h-full" src={`../upload/${post.img}`} alt="no" />
