@@ -92,7 +92,7 @@ export default function Single() {
       <div className="flex items-center mt-4">
         <Link to={post.userId ? `/user/${post.userId}` : '#'}>
           {post.userImg ? (
-            <img src={`../upload/${post.userImg}`} alt="" className="w-12 h-12 border rounded-full" />
+            <img src={`../upload/${post?.userImg}`} alt="" className="w-12 h-12 border rounded-full" />
           ) : (
             <div className="w-8 h-8 border rounded-full flex items-center justify-center text-white bg-teal-500">
               <Avatar style={{ backgroundColor: 'teal' }}>{post.username?.charAt(0)}</Avatar>
