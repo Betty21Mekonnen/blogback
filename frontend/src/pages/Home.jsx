@@ -26,7 +26,7 @@ export default function Home() {
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = posts?.slice(indexOfFirstPost, indexOfLastPost);
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
