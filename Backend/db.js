@@ -1,4 +1,4 @@
-import mysql from "mysql"
+import mysql from "mysql2"
 import dotenv from 'dotenv';
 dotenv.config();
 const urlDb=`mysql://${process.env.MYSQLUSER}:${process.env.MYSQLPASSWORD}@${process.env.MYSQLHOST}:${process.env.MYSQLPORT}/${process.env.MYSQLDATABASE}`
