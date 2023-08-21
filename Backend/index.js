@@ -12,7 +12,7 @@ app.use(express.json())
 import cors from 'cors'
 app.use(cors());
 //'http://127.0.0.1:5173'
-const allowedOrigin ='blogging-steel.vercel.app' 
+const allowedOrigin ='https://blogging-steel.vercel.app'
 app.use(cors({
   origin: allowedOrigin,
   credentials: true 
