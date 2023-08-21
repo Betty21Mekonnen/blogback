@@ -6,7 +6,7 @@ export const AuthContextProvider=({children})=>{
   const [loginResponse, setLoginResponse] = useState(null);
 
   const login = async (inputs) => {    
-	 const response = await fetch(`${REACT_APP_BACKEND_URL}/backend/auth/log`, {
+	 const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/backend/auth/log`, {
 		  method: 'POST',
 		  credentials: 'include',
 		  headers: {
@@ -22,7 +22,7 @@ export const AuthContextProvider=({children})=>{
   }
   
   const logout = async() => {    
-    await fetch(`${REACT_APP_BACKEND_URL}/backend/auth/logout`, {
+    await fetch(`${import.meta.env.VITE_BACKEND_URL}/backend/auth/logout`, {
       method: 'POST',
       credentials: 'include',  
     });
