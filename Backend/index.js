@@ -57,7 +57,7 @@ import { dirname, join } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const uploadFolderPath = join(__dirname, '../frontend/public/upload');
+const uploadFolderPath = join(__dirname, '../upload');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -70,7 +70,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-app.use('/upload', express.static(join(__dirname, '..upload')));
+app.use('/upload', express.static(join(__dirname, '../upload')));
 
 app.post('/backend/upload', upload.single('file'), function (req, res) {
   const file = req.file;
