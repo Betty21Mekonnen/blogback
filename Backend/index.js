@@ -47,8 +47,6 @@ app.use((req, res, next) => {
 //    res.status(200).json(file?.filename)
 // })
 
-const path = require('path');
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.join(__dirname, 'upload')); // Use an absolute path
