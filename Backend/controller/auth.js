@@ -51,7 +51,6 @@ export const login = (req, res) => {
 			sameSite: "none",
 			secure: true,
 			path: "/",
-			domain: 'https://blogging-steel.vercel.app'
 		  })
 		  .status(200)
 		  .json({ ...other });

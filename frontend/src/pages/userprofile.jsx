@@ -40,7 +40,7 @@ export default function Mapofthis(){
         try {
           const formData = new FormData();
           formData.append('file', file);
-          const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/backend/upload`, formData,{withCredentials:true}, {
+          const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/backend/upload`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },

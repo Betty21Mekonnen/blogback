@@ -56,7 +56,9 @@ export default function Write() {
           img: file ? imgurl : '',
         },config);
       } else {
+       // const { data } =await axios.post(`${import.meta.env.VITE_BACKEND_URL}/backend/posts/`, {
         const { data } =await axios.post(`${import.meta.env.VITE_BACKEND_URL}/backend/posts/`, {
+        
           title: title,
           descr: value,
           cat: cat,
