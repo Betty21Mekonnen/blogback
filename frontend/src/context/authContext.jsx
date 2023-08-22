@@ -24,7 +24,7 @@ export const AuthContextProvider=({children})=>{
   const logout = async() => {    
     await fetch(`${import.meta.env.VITE_BACKEND_URL}/backend/auth/logout`, {
       method: 'POST',
-      // credentials: 'include',  
+      credentials: 'include',  
     });
     //navigate("/")
     setCurrentUser(null);
