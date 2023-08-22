@@ -61,9 +61,6 @@ const upload = multer({storage })
 app.post('/backend/upload', upload.single('file'), function (req, res) {
   const file=req.file
    res.status(200).json(file?.filename)
-},  {
-  method: 'post',
-   withCredentials: true,
 })
 app.use("/backend/auth",authRoutes)
 app.use("/backend/posts",postRoutes)
