@@ -35,15 +35,12 @@ app.use((req, res, next) => {
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-   // cb(null, '../frontend/public/upload')
-   cb(null, 'https://blogging-steel.vercel.app/upload')
+    cb(null, `${__dirname}/../frontend/public/upload`)
   },
   filename: function (req, file, cb) {
     cb(null, Date.now()+file.originalname)
   }
 })
-
-
 const upload = multer({storage })
 app.post('/backend/upload', upload.single('file'), function (req, res) {
   const file=req.file
