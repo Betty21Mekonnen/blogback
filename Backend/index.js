@@ -32,12 +32,11 @@ app.use((req, res, next) => {
 //   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 //   next();
 // });
-const moduleURL = new URL(import.meta.url);
-const uploadPath = path.join(path.dirname(moduleURL.pathname), '../frontend/public/upload');
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
    // cb(null, '../frontend/public/upload')
-   cb(null, uploadPath)
+   cb(null, 'https://blogging-steel.vercel.app/upload')
   },
   filename: function (req, file, cb) {
     cb(null, Date.now()+file.originalname)
