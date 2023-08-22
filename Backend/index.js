@@ -32,15 +32,20 @@ app.use((req, res, next) => {
 //   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 //   next();
 // });
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, `${__dirname}/../frontend/public/upload`)
+    cb(null, join(__dirname, '../frontend/public/upload'));
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now()+file.originalname)
+    cb(null, Date.now() + file.originalname);
   }
-})
+});
 const upload = multer({storage })
 app.post('/backend/upload', upload.single('file'), function (req, res) {
   const file=req.file
