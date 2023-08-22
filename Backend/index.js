@@ -5,6 +5,7 @@ import authRoutes from './routes/auth.js'
 import cookieParser from "cookie-parser"
 import multer from "multer"
 import dotenv from 'dotenv';
+const path = require('path');
 dotenv.config();
 const app=express()
 app.use(cookieParser())
@@ -31,11 +32,11 @@ app.use((req, res, next) => {
 //   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 //   next();
 // });
-
+const uploadPath = path.join(__dirname, '../frontend/public/upload');
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'https://blogging-steel.vercel.app/upload')
    // cb(null, '../frontend/public/upload')
+   cb(null, uploadPath)
   },
   filename: function (req, file, cb) {
     cb(null, Date.now()+file.originalname)
