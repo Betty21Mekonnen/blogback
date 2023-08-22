@@ -34,7 +34,7 @@ const q="SELECT p.id,u.id AS userId , `username`, `title`, `descr` , p.img,u.img
 // }
 export const addpost=(req,res)=>{
 	 const token =  req.cookies.token
-	 //console.log(token)
+	 console.log(token)
 	 if(!token) return res.status(401).json("Not authenticated user")
 	  jwt.verify(token,"jwtnewkey" , (err,userInfo)=>{
 		if (err) return res.status(403).json("Token is not valid")
