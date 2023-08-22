@@ -61,12 +61,13 @@ export const login = (req, res) => {
 	});
 
  }
-export const logout = (req, res) => {
-	res.clearCookie("token",{
-	  sameSite:"none",
-	  secure:true
-	}).status(200).json("User has been logged out.")
-	
+ export const logout = (req, res) => {
+	res.clearCookie("token", {
+	  httpOnly: true,
+	  sameSite: "none",
+	  secure: true,
+	  path: "/"
+	}).status(200).json("User has been logged out.");
   };
   //new ketach
 //   const sendTokenResponse = async (user, codeStatus, res)=>{
