@@ -32,50 +32,34 @@ app.use((req, res, next) => {
 //   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 //   next();
 // });
-// import { fileURLToPath } from 'url';
-// import { dirname, join } from 'path';
-
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = dirname(__filename);
 
 // const storage = multer.diskStorage({
 //   destination: function (req, file, cb) {
-//     cb(null, join(__dirname, '../frontend/public/upload'));
+//     cb(null, '../frontend/public/upload')
 //   },
 //   filename: function (req, file, cb) {
-//     cb(null, Date.now() + file.originalname);
+//     cb(null, Date.now()+file.originalname)
 //   }
-// });
+// })
 // const upload = multer({storage })
 // app.post('/backend/upload', upload.single('file'), function (req, res) {
 //   const file=req.file
 //    res.status(200).json(file?.filename)
 // })
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const uploadFolderPath = join(__dirname, '../upload');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, uploadFolderPath);
+    cb(null, 'upload')
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + file.originalname);
+    cb(null, Date.now()+file.originalname)
   }
-});
-
-const upload = multer({ storage });
-
-app.use('/upload', express.static(join(__dirname, '../upload')));
-
+})
+const upload = multer({storage })
 app.post('/backend/upload', upload.single('file'), function (req, res) {
-  const file = req.file;
-  res.status(200).json(file?.filename);
-});
+  const file=req.file
+   res.status(200).json(file?.filename)
+})
 app.use("/backend/auth",authRoutes)
 app.use("/backend/posts",postRoutes)
 app.use("/backend/users",userRoutes)
