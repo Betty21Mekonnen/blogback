@@ -14,7 +14,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/backend/posts${cat}`);
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/backend/posts${cat}`,{withCredentials: true},);
         console.log(res.data)
         setPosts(res.data);
       } catch (err) {
