@@ -63,7 +63,6 @@ app.post('/backend/upload', upload.single('file'), function (req, res) {
 app.use("/backend/auth",authRoutes)
 app.use("/backend/posts",postRoutes)
 app.use("/backend/users",userRoutes)
-app.use('/upload', express.static('upload'));
 // const User = {
 //   getJwtToken: function () {
 //     const payload = { id: this.id };
