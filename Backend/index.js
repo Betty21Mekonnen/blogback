@@ -5,7 +5,7 @@ import authRoutes from './routes/auth.js'
 import cookieParser from "cookie-parser"
 import multer from "multer"
 import dotenv from 'dotenv';
-const path = require('path');
+import path from "path"
 dotenv.config();
 const app=express()
 app.use(cookieParser())
