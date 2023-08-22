@@ -71,7 +71,7 @@ const useRegisterForm = (callback) => {
       try {
         if (state) {
           // Update existing user
-          await axios.put(`${import.meta.env.VITE_BACKEND_URL}/backend/users/${state.id}`, inputs),config;
+          await axios.put(`${import.meta.env.VITE_BACKEND_URL}/backend/users/${state.id}`, inputs,config);
         } else {
           // Register new user
           await axios.post(`${import.meta.env.VITE_BACKEND_URL}/backend/auth/reg`, inputs,config);
