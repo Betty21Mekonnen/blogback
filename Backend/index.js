@@ -47,14 +47,18 @@ app.use((req, res, next) => {
 //    res.status(200).json(file?.filename)
 // })
 
+const path = require('path');
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'upload')
+    cb(null, path.join(__dirname, 'upload')); // Use an absolute path
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now()+file.originalname)
+    cb(null, Date.now() + file.originalname);
   }
-})
+});
+
+// ...
 const upload = multer({storage })
 app.post('/backend/upload', upload.single('file'), function (req, res) {
   const file=req.file
@@ -63,6 +67,7 @@ app.post('/backend/upload', upload.single('file'), function (req, res) {
 app.use("/backend/auth",authRoutes)
 app.use("/backend/posts",postRoutes)
 app.use("/backend/users",userRoutes)
+app.use('/upload', express.static('upload'));
 // const User = {
 //   getJwtToken: function () {
 //     const payload = { id: this.id };
