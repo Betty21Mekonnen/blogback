@@ -70,7 +70,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-app.use('/upload', express.static(join(__dirname, '../frontend/public/upload')));
+app.use('/upload', express.static(join(__dirname, '..upload')));
 
 app.post('/backend/upload', upload.single('file'), function (req, res) {
   const file = req.file;
