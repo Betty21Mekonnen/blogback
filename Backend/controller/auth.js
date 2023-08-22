@@ -47,10 +47,10 @@ export const login = (req, res) => {
 	  if (isPasswordCorrect) {
 		res
 		  .cookie("token", token, {
-			httpOnly: true,
-			sameSite: "none",
-			secure: true,
-			path: "/",
+			// httpOnly: true,
+			// sameSite: "none",
+			// secure: true,
+			// path: "/",
 		  })
 		  .status(200)
 		  .json({ ...other });

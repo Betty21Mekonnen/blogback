@@ -32,7 +32,7 @@ export default function Single() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/backend/posts/comment/${postId}`,{withCredentials: true,});
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/backend/posts/comment/${postId}`);
         setComments(res.data);
       } catch (err) {
         console.log(err);
