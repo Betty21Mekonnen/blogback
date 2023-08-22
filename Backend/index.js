@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../frontend/public/upload')
+    cb(null, 'https://blogging-steel.vercel.app/frontend/public/upload')
   },
   filename: function (req, file, cb) {
     cb(null, Date.now()+file.originalname)
