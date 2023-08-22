@@ -32,7 +32,8 @@ app.use((req, res, next) => {
 //   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 //   next();
 // });
-const uploadPath = path.join(__dirname, '../frontend/public/upload');
+const moduleURL = new URL(import.meta.url);
+const uploadPath = path.join(path.dirname(moduleURL.pathname), '../frontend/public/upload');
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
    // cb(null, '../frontend/public/upload')
