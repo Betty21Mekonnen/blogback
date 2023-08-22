@@ -31,10 +31,10 @@ app.use((req, res, next) => {
 //   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 //   next();
 // });
-const frontendURL = 'https://blogging-steel.vercel.app';
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, `${frontendURL}/frontend/public/upload`)
+    cb(null, 'https://blogging-steel.vercel.app/upload')
    // cb(null, '../frontend/public/upload')
   },
   filename: function (req, file, cb) {
