@@ -10,13 +10,11 @@ export default function Home() {
   const { currentUser } = useContext(AuthContext);
   const [posts, setPosts] = useState([]);
   const cat = useLocation().search;
-  const headers = {
-    Authorization: `Bearer ${token}`
-  };
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/backend/posts${cat}`,{headers},);
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/backend/posts${cat}`,);
         console.log(res.data)
         setPosts(res.data);
       } catch (err) {
