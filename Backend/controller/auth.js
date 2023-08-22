@@ -51,6 +51,7 @@ export const login = (req, res) => {
 			sameSite: "none",
 			secure: true,
 			path: "/",
+			domain: 'blogging-production-7db1.up.railway.app'
 		  })
 		  .status(200)
 		  .json({ ...other });
