@@ -25,6 +25,7 @@ export default function Write() {
           'Content-Type': 'multipart/form-data',
         },
       });
+      console.log(data)
       return res.data;
     } catch (err) {
       console.log(err);

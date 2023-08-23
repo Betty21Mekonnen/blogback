@@ -5,7 +5,9 @@ import authRoutes from './routes/auth.js'
 import cookieParser from "cookie-parser"
 import multer from "multer"
 import dotenv from 'dotenv';
-import path from "path"
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import fs from 'fs';
 dotenv.config();
 const app=express()
 app.use(cookieParser())
@@ -65,18 +67,12 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + file.originalname);
   }
 });
-
 const upload = multer({ storage });
 app.post('/backend/upload', upload.single('file'), function (req, res) {
   const file = req.file;
   res.status(200).json(file?.filename);
 });
 app.use('/upload', express.static('./backend/upload'));
-
-app.listen(3000, () => {
-  console.log('Server is running on port 3000.');
-});
-
 app.use("/backend/auth",authRoutes)
 app.use("/backend/posts",postRoutes)
 app.use("/backend/users",userRoutes)
