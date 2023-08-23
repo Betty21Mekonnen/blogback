@@ -70,18 +70,15 @@ const storage = multer.diskStorage({
     cb(null, uploadDir);
   },
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    const fileExtension = file.originalname.split('.').pop();
-    const fileName = `${uniqueSuffix}.${fileExtension}`;
-    cb(null, fileName);
-  }
+        cb(null, Date.now()+file.originalname)
+     }
 });
 
 const upload = multer({ storage });
 
 app.post('/backend/upload', upload.single('file'), function (req, res) {
   const file = req.file;
-  res.status(200).json({ filename: file?.filename });
+  res.status(200).json(file?.filename );
 });
 
 app.use('/upload', express.static(uploadDir));
