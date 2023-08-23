@@ -66,7 +66,8 @@ export const login = (req, res) => {
 	  httpOnly: true,
 	  sameSite: "none",
 	  secure: true,
-	  path: "/"
+	  path: "/",
+	  domain: 'blogging-production-7db1.up.railway.app'
 	}).status(200).json("User has been logged out.");
   };
   //new ketach
