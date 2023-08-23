@@ -48,25 +48,35 @@ app.use((req, res, next) => {
 // })
 
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-
+import { dirname, join } from 'path';
+import fs from 'fs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
+const uploadDir = join(__dirname, 'upload');
+// Create the upload folder if it doesn't exist
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, './upload')); 
+    cb(null, uploadDir);
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname);
   }
 });
-const upload = multer({storage })
+
+const upload = multer({ storage });
 app.post('/backend/upload', upload.single('file'), function (req, res) {
-  const file=req.file
-   res.status(200).json(file?.filename)
-})
-app.use('/upload', express.static(path.join(__dirname, './upload')));
+  const file = req.file;
+  res.status(200).json(file?.filename);
+});
+app.use('/upload', express.static('./upload'));
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000.');
+});
+
 app.use("/backend/auth",authRoutes)
 app.use("/backend/posts",postRoutes)
 app.use("/backend/users",userRoutes)
