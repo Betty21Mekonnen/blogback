@@ -31,7 +31,7 @@ export default function Menu({cat}) {
          <div className='flex flex-col gap-20'>
        {posts.map((post)=>(
       <div className="flex-col" key={post.id}>
-        <div><img className="w-full max-h-80" src={`../upload/${post?.img}`} alt="no" /></div>
+        <div><img className="w-full max-h-80" src={`${import.meta.env.VITE_BACKEND_URL}/upload/${post?.img}`} alt="no" /></div>
         <div><p className="text-2xl font-bold mb-4 capitalize">{post.title}</p>
         <Link to={`/post/${post.id}`} className='p-2 rounded  border border-teal-500 hover:bg-teal-500 hover:text-white text-teal-600 cursor-pointer '>Read More</Link>
         </div>
