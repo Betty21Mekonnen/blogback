@@ -71,7 +71,7 @@ app.post('/backend/upload', upload.single('file'), function (req, res) {
   const file = req.file;
   res.status(200).json(file?.filename);
 });
-app.use('/upload', express.static('./upload'));
+app.use('/upload', express.static('./backend/upload'));
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000.');
