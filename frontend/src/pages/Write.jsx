@@ -20,7 +20,7 @@ export default function Write() {
     try {
       const formData = new FormData();
       formData.append('file', file);
-      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/backend/upload`, formData, {
+      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
