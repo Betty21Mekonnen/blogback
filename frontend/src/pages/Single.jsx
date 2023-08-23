@@ -87,11 +87,11 @@ export default function Single() {
   return (
     <div className="flex flex-col md:flex-row gap-20 px-8 py-4" key={post?.id}>
     <div className="w-full md:w-7/10">
-      <img className="w-full h-auto max-h-96" src={`../upload/${post?.img}`} alt="" />
+      <img className="w-full h-auto max-h-96" src={`${import.meta.env.VITE_BACKEND_URL}/upload/${post.img}`}  alt="" />
       <div className="flex items-center mt-4">
         <Link to={post.userId ? `/user/${post.userId}` : '#'}>
           {post.userImg ? (
-            <img src={`../upload/${post?.userImg}`} alt="" className="w-12 h-12 border rounded-full" />
+            <img src={`${import.meta.env.VITE_BACKEND_URL}/upload/${post?.userImg}`} alt="" className="w-12 h-12 border rounded-full" />
           ) : (
             <div className="w-8 h-8 border rounded-full flex items-center justify-center text-white bg-teal-500">
               <Avatar style={{ backgroundColor: 'teal' }}>{post.username?.charAt(0)}</Avatar>
@@ -118,7 +118,7 @@ export default function Single() {
           <div key={comm.id}>
             <div className="flex items-center mb-4">
               {comm.userImg ? (
-                <img src={`../upload/${comm?.userImg}`} alt="" className="w-8 h-8 border rounded-full" />
+                <img src={`${import.meta.env.VITE_BACKEND_URL}/upload/${comm?.userImg}`} alt="" className="w-8 h-8 border rounded-full" />
               ) : (
                 <div className="w-6 h-6 border rounded-full flex items-center justify-center text-white bg-teal-500">
                   <Avatar style={{ backgroundColor: 'teal' }}>{comm.username.charAt(0)}</Avatar>
