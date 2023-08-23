@@ -53,7 +53,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const uploadDir = join(__dirname, 'upload');
 const absoluteUploadDir = join(process.cwd(), uploadDir);
+const parentDir = join(absoluteUploadDir, '..');
 
+// Create the parent directory if it doesn't exist
+if (!fs.existsSync(parentDir)) {
+  try {
+    fs.mkdirSync(parentDir, { recursive: true });
+    console.log('Parent directory created:', parentDir);
+  } catch (error) {
+    console.error('Error creating parent directory:', error);
+  }
+}
 // Create the upload folder if it doesn't exist
 if (!fs.existsSync(absoluteUploadDir)) {
   try {
