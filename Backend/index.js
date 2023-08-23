@@ -55,14 +55,12 @@ const __dirname = dirname(__filename);
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, 'upload')); // Use an absolute path
+    cb(null, path.join(__dirname, './upload')); // Use an absolute path
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname);
   }
 });
-
-// ...
 const upload = multer({storage })
 app.post('/backend/upload', upload.single('file'), function (req, res) {
   const file=req.file
