@@ -51,6 +51,7 @@ app.use((req, res, next) => {
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+const uploadDir = join(__dirname, 'upload');
 const absoluteUploadDir = join(process.cwd(), uploadDir);
 
 // Create the upload folder if it doesn't exist
