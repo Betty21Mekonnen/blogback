@@ -51,12 +51,13 @@ app.use((req, res, next) => {
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const uploadDir = join(__dirname, 'upload');
+const absoluteUploadDir = join(process.cwd(), uploadDir);
+
 // Create the upload folder if it doesn't exist
-if (!fs.existsSync(uploadDir)) {
+if (!fs.existsSync(absoluteUploadDir)) {
   try {
-    fs.mkdirSync(uploadDir);
-    console.log("created")
+    fs.mkdirSync(absoluteUploadDir);
+    console.log('Upload folder created:', absoluteUploadDir);
   } catch (error) {
     console.error('Error creating upload folder:', error);
   }
