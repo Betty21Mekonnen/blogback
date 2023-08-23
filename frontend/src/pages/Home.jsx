@@ -41,7 +41,7 @@ console.log(currentUser)
         {currentPosts.map((post) => (
           <div className="flex flex-col md:flex-row md:gap-20" key={post.id}>
             <div className="md:w-1/3">
-              <img className="w-full h-full" src={`${import.meta.env.VITE_BACKEND_URL}/upload/${post.img}`} alt="no" />
+              <img className="w-full h-full" src={`${import.meta.env.VITE_BACKEND_URL}/upload/${post.img}`}alt="no" />
             </div>
             <div className="md:w-2/3">
               <Link to={`/post/${post.id}`}>
