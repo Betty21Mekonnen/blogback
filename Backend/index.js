@@ -49,44 +49,44 @@ app.use((req, res, next) => {
 //    res.status(200).json(file?.filename)
 // })
 
+
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const uploadDir = join(__dirname, 'upload');
-const absoluteUploadDir = join(process.cwd(), uploadDir);
-const parentDir = join(absoluteUploadDir, '..');
 
-// Create the parent directory if it doesn't exist
-if (!fs.existsSync(parentDir)) {
-  try {
-    fs.mkdirSync(parentDir, { recursive: true });
-    console.log('Parent directory created:', parentDir);
-  } catch (error) {
-    console.error('Error creating parent directory:', error);
-  }
-}
 // Create the upload folder if it doesn't exist
-if (!fs.existsSync(absoluteUploadDir)) {
+if (!fs.existsSync(uploadDir)) {
   try {
-    fs.mkdirSync(absoluteUploadDir);
-    console.log('Upload folder created:', absoluteUploadDir);
+    fs.mkdirSync(uploadDir, { recursive: true });
+    console.log('Upload folder created:', uploadDir);
   } catch (error) {
     console.error('Error creating upload folder:', error);
   }
 }
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, uploadDir);
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + file.originalname);
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const fileExtension = file.originalname.split('.').pop();
+    const fileName = `${uniqueSuffix}.${fileExtension}`;
+    cb(null, fileName);
   }
 });
+
 const upload = multer({ storage });
+
 app.post('/backend/upload', upload.single('file'), function (req, res) {
   const file = req.file;
-  res.status(200).json(file?.filename);
+  res.status(200).json({ filename: file?.filename });
 });
-app.use('/upload', express.static('./upload'));
+
+app.use('/upload', express.static(uploadDir));
+
 app.use("/backend/auth",authRoutes)
 app.use("/backend/posts",postRoutes)
 app.use("/backend/users",userRoutes)
