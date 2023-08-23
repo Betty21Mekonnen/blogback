@@ -66,7 +66,7 @@ app.post('/backend/upload', upload.single('file'), function (req, res) {
   const file=req.file
    res.status(200).json(file?.filename)
 })
-//app.use('/upload', express.static(path.join(__dirname, './upload')));
+app.use('/upload', express.static(path.join(__dirname, './upload')));
 app.use("/backend/auth",authRoutes)
 app.use("/backend/posts",postRoutes)
 app.use("/backend/users",userRoutes)
