@@ -54,7 +54,12 @@ const __dirname = dirname(__filename);
 const uploadDir = join(__dirname, 'upload');
 // Create the upload folder if it doesn't exist
 if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
+  try {
+    fs.mkdirSync(uploadDir);
+    console.log("created")
+  } catch (error) {
+    console.error('Error creating upload folder:', error);
+  }
 }
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
