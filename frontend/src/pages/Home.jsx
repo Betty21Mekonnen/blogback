@@ -44,7 +44,7 @@ console.log(currentUser)
            <img className="w-full h-full" src={`${import.meta.env.VITE_BACKEND_URL}/upload/${post.img}`} alt="no"
                 onError={(e) => {const id = post.id;
                 if (id % 2 === 0) {
-                        e.target.src = '../upload/1692188092664tech.jpg'; 
+                        e.target.src = '../upload/1691745112472ye-berhan-enat-diakon-henok-haile (1).jpg'; 
                 } else {
                     e.target.src = '../upload/1692350806928paintings.jpg';                
                   }
