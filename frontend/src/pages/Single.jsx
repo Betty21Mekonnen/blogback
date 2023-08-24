@@ -87,7 +87,15 @@ export default function Single() {
   return (
     <div className="flex flex-col md:flex-row gap-20 px-8 py-4" key={post?.id}>
     <div className="w-full md:w-7/10">
-      <img className="w-full h-auto max-h-96" src={`${import.meta.env.VITE_BACKEND_URL}/upload/${post.img}`}  alt="" />
+      <img className="w-full h-auto max-h-96" src={`${import.meta.env.VITE_BACKEND_URL}/upload/${post.img}`} alt="no"
+                onError={(e) => {const id = post.id;
+                if (id % 2 === 0) {
+                        e.target.src = '../upload/1691745112472ye-berhan-enat-diakon-henok-haile (1).jpg'; 
+                } else {
+                    e.target.src = '../upload/1692350806928paintings.jpg';                
+                  }
+                 }}
+            />
       <div className="flex items-center mt-4">
         <Link to={post.userId ? `/user/${post.userId}` : '#'}>
           {post.userImg ? (
