@@ -127,7 +127,15 @@ export default function Mapofthis(){
     <div className="flex flex-wrap justify-center">
   {posts.map((post) => (
     <div className="flex flex-col bg-white rounded-lg shadow-md w-full mx-6 mb-6 overflow-hidden md:w-52" key={post.id}>
-      <img src={`../upload/${post.img}`} alt="" className="h-20 m-6" />
+      <img className="h-20 m-6" src={`${import.meta.env.VITE_BACKEND_URL}/upload/${post.img}`} alt="no"
+                onError={(e) => {const id = post.id;
+                if (id % 2 === 0) {
+                        e.target.src = '../upload/1691745112472ye-berhan-enat-diakon-henok-haile (1).jpg'; 
+                } else {
+                    e.target.src = '../upload/1692350806928paintings.jpg';                
+                  }
+                 }}
+            /> 
       <Link to={`/post/${post.id}`}>
         <h2 className="text-center px-2 pb-5">{post.title}</h2>
       </Link>
