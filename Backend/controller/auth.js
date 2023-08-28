@@ -1,6 +1,7 @@
 import {db} from '../db.js'
 import bcrypt from 'bcryptjs'
 import jwt from'jsonwebtoken'
+import nodemailer from 'nodemailer'
 import base64url from 'base64url'
 //import User from '../index.js';
 
