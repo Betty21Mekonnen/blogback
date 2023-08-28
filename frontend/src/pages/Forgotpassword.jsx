@@ -11,7 +11,7 @@ function ForgotPassword() {
     axios.defaults.withCredentials = true;
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post(`${import.meta.env.VITE_BACKEND_URL}/backend//auth/forgot-password`, {email})
+        axios.post(`${import.meta.env.VITE_BACKEND_URL}/backend/auth/forgot-password`, {email})
         .then(res => {
             if(res.data.Status === "Success") {
                 navigate('/login')
