@@ -14,7 +14,7 @@ app.use(cookieParser())
 app.use(express.json())
 import cors from 'cors';
 
-const allowedOrigin = 'https://blogging-steel.vercel.app';
+const allowedOrigin = 'https://finalblog-eight.vercel.app';
 const corsOptions = {
   origin: allowedOrigin,
   credentials: true
