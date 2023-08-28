@@ -47,7 +47,7 @@ export const forgot = async (req, res) => {
   
 	  var mailOptions = {
 		from: 'bettymekonnen21@gmail.com',
-		to: 'email',
+		to: email,
 		subject: 'Reset Password Link',
 		text: `http://127.0.0.1:5173/reset_password/${data[0].id}/${token}`
 	  };
