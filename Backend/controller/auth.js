@@ -26,6 +26,58 @@ export const register=(req,res)=>{
 // 	if (err) return res.status(403).json("Token is not valid")
 //   })
 // }
+export const forgot = async (req, res) => {
+	const q = "SELECT * FROM users WHERE email=?";
+	db.query(q, [req.body.email], (err, data) => {
+	  if (err) return res.json(err);
+	  if (data.length === 0) return res.status(400).json("user not found!");
+	 
+	  let token = jwt.sign({ id: data[0].id }, "jwtnewkey", { expiresIn: "1h" });
+	  token = base64url(token);
+	  var transporter = nodemailer.createTransport({
+		service: 'gmail',
+		auth: {
+		  user: 'bmekonnenad@gmail.com',
+		  pass: 'wpuidlxrqvextory'
+		}
+	  });
+  
+	  var mailOptions = {
+		from: 'bettymekonnen21@gmail.com',
+		to: 'bmekonnenad@gmail.com',
+		subject: 'Reset Password Link',
+		text: `http://127.0.0.1:5173/reset_password/${data[0].id}/${token}`
+	  };
+  
+	  console.log(token);
+  
+	  transporter.sendMail(mailOptions, function (error, info) {
+		if (error) {
+		  console.log(error);
+		} else {
+		  return res.send({ Status: "Success" });
+		}
+	  });
+	});
+  };
+export const reset = async(req,res)=>{ 
+	const {id} = req.params
+const {password} = req.body
+const token = base64url.decode(req.params.token);
+
+jwt.verify(token, "jwtnewkey", (err, decoded) => {
+	if(err) {
+		return res.json({Status: "Error with token"})
+	}
+	const salt = bcrypt.genSaltSync(10);
+	const hash = bcrypt.hashSync(password,salt)
+	const q =  "UPDATE users SET `password`=? WHERE `id` = ? ";
+    db.query(q, [hash, id], (err, data) => {
+		if (err) return res.status(500).json(err);
+		return res.json("password reset.");
+	  });
+})}
+
 export const login = (req, res) => {
 	const q = "SELECT * FROM users WHERE email=?";
 	db.query(q, [req.body.email], (err, data) => {
