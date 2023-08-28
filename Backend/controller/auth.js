@@ -30,7 +30,8 @@ export const register=(req,res)=>{
 // }
 export const forgot = async (req, res) => {
 	const q = "SELECT * FROM users WHERE email=?";
-	db.query(q, [req.body.email], (err, data) => {
+	const email=req.body.email
+	db.query(q, [email], (err, data) => {
 	  if (err) return res.json(err);
 	  if (data.length === 0) return res.status(400).json("user not found!");
 	 
@@ -46,7 +47,7 @@ export const forgot = async (req, res) => {
   
 	  var mailOptions = {
 		from: 'bettymekonnen21@gmail.com',
-		to: 'bmekonnenad@gmail.com',
+		to: 'email',
 		subject: 'Reset Password Link',
 		text: `http://127.0.0.1:5173/reset_password/${data[0].id}/${token}`
 	  };
