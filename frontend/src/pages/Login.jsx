@@ -125,8 +125,8 @@ export default function Login() {
                         )}
             </div>
             </div>
-	            <div className="text-sm">
-               <a href="#" className="font-semibold text-gray-900 hover:text-gray-700">Forgot password?</a>
+            <div className="text-sm">
+               <Link  className="font-semibold text-gray-900 hover:text-gray-700" to="/forgot-password">Forgot Password</Link>
              </div>
             <button onClick={handleSubmit} type="submit"
               className="flex justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-gray-900 border border-transparent rounded-md shadow-sm hover:bg-gray-800 focus:outline-none focus:shadow-outline-blue active:bg-gray-900">
