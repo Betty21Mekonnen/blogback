@@ -49,7 +49,7 @@ export const forgot = async (req, res) => {
 		from: 'bettymekonnen21@gmail.com',
 		to: email,
 		subject: 'Reset Password Link',
-		text: `http://127.0.0.1:5173/reset_password/${data[0].id}/${token}`
+		text: `https://blogging-steel.vercel.app/reset_password/${data[0].id}/${token}`
 	  };
   
 	  console.log(token);
